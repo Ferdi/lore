@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'compressor',
     'bootstrap3',
+    'guardian',
     'learningresources',
     'importer',
     'ui',
@@ -96,7 +97,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
 
 ROOT_URLCONF = 'lore.urls'
 
@@ -187,3 +191,7 @@ CAS_SERVER_URL = get_var(
 )
 
 LOGIN_URL = "/admin/"
+
+# guardian specific settings
+ANONYMOUS_USER_ID = None
+GUARDIAN_RAISE_403 = True

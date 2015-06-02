@@ -2,9 +2,11 @@
 {% block content %}
 <h1>Welcome</h1>
 
+{% if perms.learningresources.add_repository %}
 <p>
 <a href="{% url 'create_repo' %}">Create repository</a>
 </p>
+{% endif %}
 
 <p>
 <h2>Your repositories</h2>

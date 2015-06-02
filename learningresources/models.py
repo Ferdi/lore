@@ -7,6 +7,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+from role.api import roles_init_new_repo
+from role.permissions import RepoPermission
 
 class Course(models.Model):
     """
@@ -58,3 +60,18 @@ class Repository(models.Model):
     description = models.TextField()
     create_date = models.DateField(auto_now_add=True)
     created_by = models.ForeignKey(User)
+
+    class Meta:
+        permissions = (
+            RepoPermission.edit_repo,
+            RepoPermission.use_repo,
+            RepoPermission.view_repo,
+        )
+
+    def save(self, *args, **kwargs):
+        is_create = False
+        if not self.id:
+            is_create = True
+        super(Repository, self).save(*args, **kwargs)
+        if is_create:
+            roles_init_new_repo(self)

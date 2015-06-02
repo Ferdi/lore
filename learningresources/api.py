@@ -9,9 +9,12 @@ from datetime import datetime
 
 from django.db import transaction
 
+from guardian.shortcuts import get_objects_for_user
+
 from learningresources.models import (
     Course, Repository, LearningResource, LearningResourceType
 )
+from role.permissions import RepoPermission
 
 TYPE_LOOKUP = {}
 
@@ -127,6 +130,6 @@ def get_repos(user):
     Args:
         user (auth.User): request.user
     Returns:
-        repos query set of learningobject.Repository: repositories
+        repos query set of learningobject.Repository: repositories #TODO: fix this
     """
-    return Repository.objects.filter(created_by__id=user.id).order_by('name')
+    return get_objects_for_user(user, RepoPermission.view_repo[0], klass=Repository)
