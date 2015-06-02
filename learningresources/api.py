@@ -130,6 +130,10 @@ def get_repos(user):
     Args:
         user (auth.User): request.user
     Returns:
-        repos query set of learningobject.Repository: repositories #TODO: fix this
+        repos query set of learningobject.Repository: repositories
     """
-    return get_objects_for_user(user, RepoPermission.view_repo[0], klass=Repository)
+    return get_objects_for_user(
+        user,
+        RepoPermission.view_repo[0],
+        klass=Repository
+    )

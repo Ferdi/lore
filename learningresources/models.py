@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from role.api import roles_init_new_repo
 from role.permissions import RepoPermission
 
+
 class Course(models.Model):
     """
     A course on edX platform (MITx or residential).
@@ -61,7 +62,7 @@ class Repository(models.Model):
     create_date = models.DateField(auto_now_add=True)
     created_by = models.ForeignKey(User)
 
-    class Meta:
+    class Meta:  # pylint: disable=missing-docstring, old-style-class, no-init, too-few-public-methods
         permissions = (
             RepoPermission.edit_repo,
             RepoPermission.use_repo,

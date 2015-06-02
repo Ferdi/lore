@@ -33,6 +33,7 @@ class RepoPermission(object):
             cls.use_repo[0],
             cls.view_repo[0],
         ]
+
     @classmethod
     def curator_permissions(cls):
         """
@@ -42,6 +43,7 @@ class RepoPermission(object):
             cls.use_repo[0],
             cls.view_repo[0],
         ]
+
     @classmethod
     def author_permissions(cls):
         """

@@ -29,8 +29,8 @@ def welcome(request):
 @login_required
 @permission_required_or_403(
     '{}.add_{}'.format(
-       Repository._meta.app_label,  # pylint: disable=protected-access
-       Repository._meta.model_name  # pylint: disable=protected-access
+        Repository._meta.app_label,  # pylint: disable=protected-access
+        Repository._meta.model_name  # pylint: disable=protected-access
     )
 )
 def create_repo(request):
@@ -42,7 +42,11 @@ def create_repo(request):
         form = RepositoryForm(data=request.POST)
         if form.is_valid():
             repo = form.save(request.user)
-            assign_user_to_repo_group(request.user, repo, GroupTypes.repo_administrator)
+            assign_user_to_repo_group(
+                request.user,
+                repo,
+                GroupTypes.repo_administrator
+            )
             return redirect(reverse("welcome"))
     return render(
         request,

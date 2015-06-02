@@ -36,7 +36,11 @@ def roles_init_new_repo(repo):
 
     return True
 
-def assign_user_to_repo_group(user, repo, group_type=GroupTypes.repo_administrator):
+
+def assign_user_to_repo_group(
+        user,
+        repo,
+        group_type=GroupTypes.repo_administrator):
     """
     Assigns an user to a repo specific group type
     """
