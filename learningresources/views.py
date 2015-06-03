@@ -51,16 +51,18 @@ def create_repo(request):
 
 
 @login_required
-def listing(request, repo_id, page=1):
+def listing(request, repo_slug, page=1):
     """
     View available LearningResources by repository.
     """
     # Enforce repository access restrictions.
-    repo_id = int(repo_id)
+
+    # may work better as a database query, not likely a bottleneck though
     repos = get_repos(request.user.id)
-    if repo_id not in set([x.id for x in repos]):
+    if repo_slug not in set([x.slug for x in repos]):
         return HttpResponseForbidden("unauthorized")
-    repo = [x for x in repos if x.id == repo_id][0]
+    repo = [x for x in repos if x.slug == repo_slug][0]
+    repo_id = repo.id
     context = {
         "repo_id": repo_id,
         "repo": repo,
