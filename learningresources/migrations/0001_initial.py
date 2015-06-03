@@ -76,4 +76,12 @@ class Migration(migrations.Migration):
             name='repository',
             field=models.ForeignKey(to='learningresources.Repository'),
         ),
+        migrations.AlterUniqueTogether(
+            name='learningresource',
+            unique_together=set([('course', 'uuid')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='course',
+            unique_together=set([('repository', 'org', 'course_number', 'run')]),
+        ),
     ]

@@ -4,6 +4,8 @@ Learning resources data model
 
 from __future__ import unicode_literals
 
+from uuid import uuid4
+
 from django.db import models
 from django.db import transaction
 from django.contrib.auth.models import User
@@ -49,6 +51,12 @@ class LearningResource(models.Model):
     class Meta:
         # pylint: disable=invalid-name,missing-docstring,too-few-public-methods
         unique_together = ("course", "uuid")
+
+    @transaction.atomic
+    def save(self, *args, **kwargs):
+        """Create UUID"""
+        self.uuid = uuid4().hex
+        return super(LearningResource, self).save(*args, **kwargs)
 
 
 class LearningResourceType(models.Model):
