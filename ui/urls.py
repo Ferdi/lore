@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^repositories/new$', create_repo, name='create_repo'),
     url(r'^repositories/(?P<repo_slug>[-\w]+)/(?P<page>\d+)$', listing,
         name='listing'),
-    url(r'^export/(?P<resource_id>\d+)$', export, name='export'),
+    url(r'^learningresources/(?P<resource_id>\d+)$', export, name='export'),
     url(r'^status$', status, name='status'),
     url(r'^repositories/(?P<repo_slug>[-\w]+)/import$', upload, name='upload'),
     url(r'^cas/', include(cas_urls)),
